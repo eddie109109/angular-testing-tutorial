@@ -1,0 +1,97 @@
+<app-users></app-users>
+<app-users></app-users>
+<app-login></app-login>
+<app-header></app-header>
+
+<h2>{{title}} {{arrayData[arrayData.length-1]}} </h2>
+<h2>{{obj.body}}</h2>
+<button (click)="testFunc('11')"> test button that takes the param 11 as the input and alert it</button> <!-- this is to test the passing param -->
+<hr>
+<input type="text" #txt/>
+<button (click)="getInputVal(txt)">getUserValue by alert</button> <!-- use #txt id to get value from the input -->
+<!-- Or I can use the $event param just like https://angular.io/guide/user-input -->
+<hr>
+<input type="text" name={{nameText}} value = {{nameText}} [disabled] = isDisabled  />
+<hr>
+<p>below is the demonstration of a ngswitch</p>
+<div [ngSwitch]="color">
+    <div *ngSwitchCase="'red'">red</div>
+    <div *ngSwitchCase="'green'">green</div>
+    <div *ngSwitchCase="'yellow'">yellow</div>
+    <div *ngSwitchDefault>black</div>
+</div>
+<hr>
+<p>below is the demonstration of a for loop</p>
+<div *ngFor="let item of fruits"> <!-- we are getting the fruits var from the component.ts -->
+    {{item}}
+</div>
+<br>
+<p>below is a for loop with a list of subjects</p>
+<div *ngFor="let item of info">
+    {{item.name}} {{item.email}}
+</div>
+<hr>
+
+<!-- we will define this onSubmit inside the ts file -->
+<!-- we must add the ngModel so that we can see the value reflected on the js console -->
+<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
+    <input type="text" name="email" ngModel> <br><br>
+    <input type="text" name="address" ngModel> <br><br>
+    <input type="text" name="contact" ngModel> <br><br>
+    <button type="submit">submit data</button>
+</form>
+
+<hr>
+<h1 my-error>testing the directive</h1>
+<!-- the above directive is referencing: https://www.sitepoint.com/practical-guide-angular-directives/#:~:text=Angular%20directives%20are%20used%20to,%2C%20attribute%20%2C%20class%20or%20comment%20. -->
+
+<app-footer></app-footer>
+
+<app-users [hero1]="hero"> </app-users> 
+<!-- for the above, the first hero1 is from the child, the second hero is from the parent from app.component.ts-->
+
+<h2 [style.color]="error?'red':pinkColor">This is to test style binding</h2>
+<!-- we use the ternary operator to change the pinkColor var  -->
+<!-- the "pinkColor" var is from app.component.ts -->
+<h2 [style.color]="'green'">This is to test normal css color, pay attention to the single quotes inside the double quotes</h2>
+
+<button (click)=onChangeColor()>when clicking on it, it changes the above pink to gold</button>
+<hr>
+<button (click)=onChangeToErrorColor()>when clicking on it, it changes the above pink color to an error color using ternary operator</button>
+
+<app-users (callParentFunction)="parentFunction($event)">
+    <!-- this is to test the event emiter -->
+</app-users>
+
+<hr>
+<p>
+    <ngb-alert [dismissible]="false">
+      <strong>Warning!</strong> Better check yourself, you're not looking too good. this is from the ng-bootstrap
+    </ngb-alert>
+  </p>
+
+  <div class="btn-group btn-group-toggle">
+    <label class="btn-primary" ngbButtonLabel>
+      <input type="checkbox" ngbButton [(ngModel)]="model.left"> Left (pre-checked)
+    </label>
+    <label class="btn-primary" ngbButtonLabel>
+      <input type="checkbox" ngbButton [(ngModel)]="model.middle"> Middle
+    </label>
+    <label class="btn-primary" ngbButtonLabel>
+      <input type="checkbox" ngbButton [(ngModel)]="model.right"> Right
+    </label>
+  </div>
+  <hr>
+  <pre>{{model | json}}</pre>
+
+
+  <hr>
+  <p>Below is for testing the router-outlet</p>
+  <a routerLink= "users">Go to Users route</a> 
+  <br>
+  <a routerLink= "footers">Go to footer route</a> 
+  <!-- this is for testing the router -->
+  <!-- we need to config these two routes in the app-routing.module.ts -->
+  <router-outlet></router-outlet> 
+  <!-- this is for testing the router -->
+  
